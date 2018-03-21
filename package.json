@@ -1,0 +1,46 @@
+{
+  "name": "arc.extension-api",
+  "version": "1.0.0",
+  "description": "An extension for Arc that adds http API endpoints to microservices",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/cucumber-js",
+    "start": "node index.js",
+    "coverage-test": "nyc --reporter=lcov --reporter=text-lcov cucumber-js -r features/",
+    "coverage-report": "nyc --reporter=lcov --reporter=text-lcov npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/altereagle/arc.extension-api.git"
+  },
+  "keywords": [
+    "Arc",
+    "API",
+    "HTTP",
+    "Extension"
+  ],
+  "author": "Kendell Joseph",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/altereagle/arc.extension-api/issues"
+  },
+  "homepage": "https://github.com/altereagle/arc.extension-api#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "cucumber": "^4.0.0",
+    "mocha": "^5.0.4",
+    "nodemon": "^1.17.2",
+    "nyc": "^11.6.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-query-boolean": "^2.0.0",
+    "express-query-date": "^1.1.0",
+    "express-query-int": "^3.0.0",
+    "morgan": "^1.9.0",
+    "mustache": "^2.3.0",
+    "user-agent-parser": "^0.6.0"
+  }
+}

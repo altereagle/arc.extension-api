@@ -5,7 +5,7 @@
 const {
   morgan,
   'user-agent-parser': userAgentParser
-} = require(`../../dependencies`);
+} = require(`../dependencies`);
 
 // Arc can report API usage
 module.exports = ({paperboy, port}) => {
@@ -26,7 +26,7 @@ module.exports = ({paperboy, port}) => {
       os, device, cpu
     } = userAgentParser(request.headers[`user-agent`]);
     const apiKey = request.headers[`arc-api-key`] || `public`;
-    
+
     // **Then** Arc triggers an API notification with the usage data
     paperboy.trigger(`@api`, JSON.stringify({
       title: process.pid,

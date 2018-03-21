@@ -10,11 +10,11 @@ const {
   'express-query-int': intParser,
   'express-query-date': dateParser,
   'express-query-boolean': booleanParser
-} = require(`../../dependencies`);
+} = require(`../dependencies`);
 const https = require(`https`);
 
 // Arc loads the `package.json`
-const packageJson             = require(`../../package.json`);
+const packageJson             = require(`../package.json`);
 
 // Arc loads resources for API authentication
 const authentication          = require(`./authentication`);
@@ -45,15 +45,15 @@ module.exports = ({ microservices, paperboy }, { port, apiRootPath }) => {
     app.use(booleanParser());
     app.use(intParser());
     app.use(dateParser());
-    
+
     // **Then** Arc will monitor the HTTP traffic
     app.use(usageReporter({paperboy, port}));
-    
+
     // **And** Arc will authenticate HTTP traffic
     app.use(authentication);
 
     // #### API Routes
-    
+
     // The API has a route to view microservice stats`
     app.get(`/view-stats/:microserviceTitleSlug`, (request, response) => {
       const { microserviceTitleSlug } = request.params;
@@ -65,16 +65,16 @@ module.exports = ({ microservices, paperboy }, { port, apiRootPath }) => {
           response.send(error.message);
         });
     });
-    
+
     // The API serves static files in the `/public` directory
     app.use(`/`, express.static(`${__dirname}/public`));
-    
+
     // The API has a route to return user stories from [pivotal tracker](https://www.pivotaltracker.com)
     app.use(`/stories`, (request, response) => {
       const getStories = () => {
         const token     = process.env.ARC_PIVOTAL_TOKEN;
         const projectId = process.env.ARC_PIVOTAL_PROJECT;
-        
+
         let path = `/services/v5/projects/${projectId}`;
         path += `/stories?filter=state:delivered,finished,rejected,started`;
         path += `,unstarted,unscheduled`;
@@ -90,32 +90,32 @@ module.exports = ({ microservices, paperboy }, { port, apiRootPath }) => {
         return new Promise((resolve, reject) => {
           https.get(options, (res) => {
             let data = ``;
-    
+
             res.on(`data`, (chunk) => data += chunk);
             res.on(`end`, () => resolve(JSON.parse(data)));
-    
+
           }).on(`error`, reject);
         });
       };
-      
+
       const respond = (data) => {
         response.send(data);
       };
-      
+
       getStories()
         .then(respond)
         .catch(respond);
     });
-    
+
     // The API has a route to get `all` microservice stats
     app.get(`/stats`, getAllMicroserviceStats({microservices}));
-    
+
     // The API has a route to get stats for a specific microservice
     app.get(`/stats/:microserviceTitleSlug`, getOneMicroserviceStats({microservices}));
-    
+
     // The API has a route to **get data from a microservice**
     app.get(`${apiRootPath || ``}/:microservice/:path?`, getMicroserviceData({paperboy, microservices}));
-    
+
     // The API has a route to show a `root` view
     app.get(`/`, (request, response) => {
       renderTemplate(`root.html`, {
@@ -147,9 +147,9 @@ module.exports = ({ microservices, paperboy }, { port, apiRootPath }) => {
         .catch((error) => {
           response.send(error.message);
         });
-      
+
     });
-    
+
     // Arc returns the express app, the server, and the port
     resolve({app, server, port});
   });

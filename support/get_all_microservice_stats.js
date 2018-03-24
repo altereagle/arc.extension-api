@@ -6,11 +6,11 @@ module.exports = ({ microservices }) => {
   return (request, response) => {
     let microserviceStats = {};
 
-    microservices.forEach(({config, title}) => {
+    microservices.forEach(({manifest, title}) => {
       // Arc adds a description of the microservice by the title of the microservice
-      microserviceStats[title] = config.description || `I have no idea what this does.`;
+      microserviceStats[title] = manifest.description || `I have no idea what this does.`;
     });
-    
+
     // Arc returns the microservice stats
     response.json(microserviceStats);
   };

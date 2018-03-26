@@ -1,6 +1,6 @@
 {
   "name": "arc.extension-api",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "An extension for Arc that adds http API endpoints to microservices",
   "main": "index.js",
   "scripts": {

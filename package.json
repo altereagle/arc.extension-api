@@ -1,6 +1,6 @@
 {
   "name": "arc.extension-api",
-  "version": "1.0.3",
+  "version": "1.0.31",
   "description": "An extension for Arc that adds http API endpoints to microservices",
   "main": "index.js",
   "scripts": {
@@ -16,13 +16,12 @@
   "keywords": [
     "Arc",
     "API",
-    "HTTP",
     "Extension"
   ],
   "author": "Kendell Joseph",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/altereagle/arc.extension-api/issues"
+    "url": "https://www.pivotaltracker.com/n/projects/2148007"
   },
   "homepage": "https://github.com/altereagle/arc.extension-api#readme",
   "devDependencies": {

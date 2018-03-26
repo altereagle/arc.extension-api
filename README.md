@@ -39,7 +39,7 @@ arc.addExtension(extension, options);
 | /support/[check_api_options.js](https://altereagle.github.io/arc.extension-api/support/check_api_options.html) |
 | /support/[create_express_server.js](https://altereagle.github.io/arc.extension-api/support/create_express_server.html) |
 | /support/[find_microservice.js](https://altereagle.github.io/arc.extension-api/support/find_microservice.html) |
-| /support/[get_all_miroservice_stats.js](https://altereagle.github.io/arc.extension-api/support/get_all_miroservice_stats.html) |
+| /support/[get_all_microservice_stats.js](https://altereagle.github.io/arc.extension-api/support/get_all_microservice_stats.html) |
 | /support/[get_microservice_data.js](https://altereagle.github.io/arc.extension-api/support/get_microservice_data.html) |
 | /support/[get_one_microservice_stats.js](https://altereagle.github.io/arc.extension-api/support/get_one_microservice_stats.html) |
 | /support/[listen_to_requests.js](https://altereagle.github.io/arc.extension-api/support/listen_to_requests.html) |

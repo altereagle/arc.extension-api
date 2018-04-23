@@ -1,13 +1,14 @@
 {
   "name": "arc.extension-api",
-  "version": "1.0.33",
+  "version": "1.1.0",
   "description": "An extension for Arc that adds http API endpoints to microservices",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/cucumber-js",
     "start": "node index.js",
     "coverage-test": "nyc --reporter=lcov --reporter=text-lcov cucumber-js -r features/",
-    "coverage-report": "nyc --reporter=lcov --reporter=text-lcov npm test"
+    "coverage-report": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "docs": "docco index.js & docco support/*"
   },
   "repository": {
     "type": "git",

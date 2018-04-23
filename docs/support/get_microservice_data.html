@@ -190,11 +190,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p><strong>Given</strong> the microservice protocol is set</p>
+              <p><strong>Given</strong> the event microservice data is sent back on it set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">const</span> protocol   = manifest.protocol;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">const</span> onEvent    = <span class="hljs-string">`<span class="hljs-subst">${title}</span>`</span>;</pre></div></div>
             
         </li>
         
@@ -205,11 +205,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p><strong>And</strong> the event microservice data is sent back on it set</p>
+              <p><strong>And</strong> the triggering event is set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">const</span> onEvent    = <span class="hljs-string">`<span class="hljs-subst">${manifest.protocol}</span><span class="hljs-subst">${title}</span>`</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">let</span> triggerEvent = <span class="hljs-string">`@<span class="hljs-subst">${title}</span>`</span>;</pre></div></div>
             
         </li>
         
@@ -220,11 +220,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p><strong>And</strong> the triggering event is set to the protocol</p>
+              <p><strong>And</strong> requests for microservice data that have a <code>path</code> but the microservice does not have a path are <strong>rejected</strong></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">let</span> triggerEvent = protocol;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span>(path &amp;&amp; !manifest.paths) <span class="hljs-keyword">return</span> reject(<span class="hljs-string">`<span class="hljs-subst">${title}</span> can't do anything with <span class="hljs-subst">${path}</span>`</span>);</pre></div></div>
             
         </li>
         
@@ -235,11 +235,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p><strong>And</strong> requests for microservice data that have a <code>path</code> but the microservice does not have a path are <strong>rejected</strong></p>
+              <p><strong>And</strong> the triggering event is updated if the path is valid</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span>(path &amp;&amp; !manifest.paths) <span class="hljs-keyword">return</span> reject(<span class="hljs-string">`<span class="hljs-subst">${title}</span> can't do anything with <span class="hljs-subst">${path}</span>`</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span>(manifest.paths &amp;&amp; manifest.paths.length) {
+          <span class="hljs-keyword">const</span> hasPath = manifest.paths.find(<span class="hljs-function">(<span class="hljs-params">manifestPath</span>) =&gt;</span> manifestPath === path);
+          <span class="hljs-keyword">if</span>(!hasPath &amp;&amp; path) <span class="hljs-keyword">return</span> reject(<span class="hljs-string">`<span class="hljs-subst">${title}</span> does not have anything at <span class="hljs-subst">${path}</span>`</span>);
+          triggerEvent = hasPath &amp;&amp; path ? <span class="hljs-string">`@<span class="hljs-subst">${title}</span>/<span class="hljs-subst">${path}</span>`</span> : triggerEvent;
+        }</pre></div></div>
             
         </li>
         
@@ -249,25 +253,6 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
-              </div>
-              <p><strong>And</strong> the triggering event is updated if the path is valid</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span>(manifest.paths &amp;&amp; manifest.paths.length) {
-          <span class="hljs-keyword">const</span> hasPath = manifest.paths.find(<span class="hljs-function">(<span class="hljs-params">manifestPath</span>) =&gt;</span> manifestPath === path);
-          <span class="hljs-keyword">if</span>(!hasPath &amp;&amp; path) <span class="hljs-keyword">return</span> reject(<span class="hljs-string">`<span class="hljs-subst">${title}</span> does not have anything at <span class="hljs-subst">${path}</span>`</span>);
-          triggerEvent = hasPath &amp;&amp; path ? <span class="hljs-string">`<span class="hljs-subst">${protocol}</span><span class="hljs-subst">${path}</span>`</span> : protocol;
-        }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-13">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p><strong>When</strong> Arc acquires a microservice process from the pool</p>
 
@@ -279,11 +264,11 @@
         </li>
         
         
-        <li id="section-14">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p><strong>And</strong> Arc releases the microservice into the pool</p>
 
@@ -294,11 +279,11 @@
         </li>
         
         
-        <li id="section-15">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p><strong>And</strong> Arc creates an event listener to listen for data from the microservice</p>
 
@@ -312,11 +297,11 @@
         </li>
         
         
-        <li id="section-16">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p><strong>Then</strong> Paperboy will listen for events from the microservice</p>
 
@@ -328,11 +313,11 @@
         </li>
         
         
-        <li id="section-17">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p><strong>And</strong> Paperboy will send the data to the microservice using the triggering event</p>
 
@@ -345,11 +330,11 @@
         </li>
         
         
-        <li id="section-18">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p><strong>But</strong> Paperboy will remove the event listener if an error was caught</p>
 
@@ -362,11 +347,11 @@
         </li>
         
         
-        <li id="section-19">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p><strong>And</strong> Arc will reject requests for data when there are acquisition issues</p>
 
@@ -381,11 +366,11 @@
         </li>
         
         
-        <li id="section-20">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <h4 id="get-microservice-data-using-api-resources">Get Microservice Data Using API Resources</h4>
 
@@ -394,11 +379,11 @@
         </li>
         
         
-        <li id="section-21">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p><strong>Given</strong> Arc finds the microservice to send data to using a microservice slug</p>
 
@@ -409,11 +394,11 @@
         </li>
         
         
-        <li id="section-22">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p><strong>When</strong> Arc gets data from the microservice</p>
 
@@ -424,11 +409,11 @@
         </li>
         
         
-        <li id="section-23">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p><strong>Then</strong> Arc replies to the request</p>
 
@@ -439,11 +424,11 @@
         </li>
         
         
-        <li id="section-24">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p><strong>But</strong> Arc responds with an error message if there were any issues</p>
 

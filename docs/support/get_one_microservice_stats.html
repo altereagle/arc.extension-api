@@ -212,7 +212,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">const</span> {settings, resource, protocol, maxLoad, process} = microservice;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">const</span> {settings, resource, maxLoad, process} = microservice;</pre></div></div>
             
         </li>
         
@@ -258,7 +258,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>            resolve({
-              settings, resource, protocol, maxLoad, title, manifest,
+              settings, resource, maxLoad, title, manifest,
               <span class="hljs-attr">process</span>: {pid, connected},
               <span class="hljs-attr">pool</span>: {size, available, borrowed, pending, max, min, spareResourceCapacity}
             });

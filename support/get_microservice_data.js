@@ -19,15 +19,11 @@ module.exports = ({paperboy, microservices}) => {
     // Arc can get microservice data
     const getMicroserviceData = ({pool, manifest, title}) => {
       return new Promise((resolve, reject) => {
+        // **Given** the event microservice data is sent back on it set
+        const onEvent    = `${title}`;
 
-        // **Given** the microservice protocol is set
-        const protocol   = manifest.protocol;
-
-        // **And** the event microservice data is sent back on it set
-        const onEvent    = `${manifest.protocol}${title}`;
-
-        // **And** the triggering event is set to the protocol
-        let triggerEvent = protocol;
+        // **And** the triggering event is set
+        let triggerEvent = `@${title}`;
 
         // **And** requests for microservice data that have a `path` but the microservice does not have a path are **rejected**
         if(path && !manifest.paths) return reject(`${title} can't do anything with ${path}`);
@@ -36,7 +32,7 @@ module.exports = ({paperboy, microservices}) => {
         if(manifest.paths && manifest.paths.length) {
           const hasPath = manifest.paths.find((manifestPath) => manifestPath === path);
           if(!hasPath && path) return reject(`${title} does not have anything at ${path}`);
-          triggerEvent = hasPath && path ? `${protocol}${path}` : protocol;
+          triggerEvent = hasPath && path ? `@${title}/${path}` : triggerEvent;
         }
 
         // **When** Arc acquires a microservice process from the pool

@@ -66,9 +66,6 @@ module.exports = ({ microservices, paperboy }, { port, apiRootPath }) => {
         });
     });
 
-    // The API serves static files in the `/public` directory
-    app.use(`/`, express.static(`${__dirname}/public`));
-
     // The API has a route to return user stories from [pivotal tracker](https://www.pivotaltracker.com)
     app.use(`/stories`, (request, response) => {
       const getStories = () => {

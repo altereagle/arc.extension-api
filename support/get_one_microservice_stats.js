@@ -26,7 +26,7 @@ module.exports = ({microservices}) => {
             pool.release(microservice);
 
             // **When** Arc gets the configurations stats from the microservice
-            const {settings, resource, protocol, maxLoad, process} = microservice;
+            const {settings, resource, maxLoad, process} = microservice;
 
             // **And** Arc gets the process stats from the microservice process
             const {pid, connected} = process;
@@ -36,7 +36,7 @@ module.exports = ({microservices}) => {
 
             // **Then** Arc will return the combined stats as a single object
             resolve({
-              settings, resource, protocol, maxLoad, title, manifest,
+              settings, resource, maxLoad, title, manifest,
               process: {pid, connected},
               pool: {size, available, borrowed, pending, max, min, spareResourceCapacity}
             });

@@ -100,7 +100,7 @@ $(`#show-details`)
 $.ajax({
   url: `${window.location.origin}/stats/{{slug}}`,
   success: (data) => {
-    const { resource, protocol, maxLoad, manifest, process, pool } = data;
+    const { resource, maxLoad, manifest, process, pool } = data;
     $(`#description`).html(manifest.description);
 
     $(`#stats`).html(``);
@@ -150,19 +150,6 @@ $.ajax({
     });
 
     $(`#stats`)
-      .append(
-        $(`<stat-item/>`)
-          .addClass(`list-group-item`)
-          .append(
-            $(`<h4/>`)
-              .addClass(`card-title`)
-              .html(`protocol`)
-          )
-          .append(
-            $(`<p/>`)
-              .addClass(`card-text`)
-              .html(manifest.protocol)
-          ))
       .append(
         $(`<stat-item/>`)
           .addClass(`list-group-item`)

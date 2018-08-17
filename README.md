@@ -45,3 +45,18 @@ arc.addExtension(extension, options);
 | /support/[listen_to_requests.js](https://altereagle.github.io/arc.extension-api/support/listen_to_requests.html) |
 | /support/[render_template.js](https://altereagle.github.io/arc.extension-api/support/render_template.html) |
 | /support/[usage_reporter.js](https://altereagle.github.io/arc.extension-api/support/usage_reporter.html) |
+
+### Environmental Variables
+| Variable | Purpose |
+| --- | -- |
+| ARC_APP_NAME | A name for your App |
+| ARC_GITHUB_REPO | A github repo url |
+| ARC_GITHUB_WIKI | A github wiki url |
+| ARC_TRAVIS_BADGE_URL | A travis badge url |
+| ARC_TRAVIS_BADGE_IMG_URL | A trais badge *image* url |
+| ARC_CODECLIMATE_BADGE_URL | A code climate badge url |
+| ARC_CODECLIMATE_BADGE_IMG_URL | A code climate badge *image* url |
+| ARC_CODECLIMATE_COVERAGE_BADGE_URL | A code climate coverage url |
+| ARC_CODECLIMATE_COVERAGE_BADGE_IMG_URL | A code climate *image* url |
+| ARC_PIVOTAL_TOKEN | A pivotal tracker token |
+| ARC_PIVOTAL_PROJECT | A pivotal tracker project |
